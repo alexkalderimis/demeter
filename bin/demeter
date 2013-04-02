@@ -54,7 +54,17 @@ if ($show_sources) {
     exit;
 }
 
-my $config_file = dirname(__FILE__) . '/../config/' . $config . '.yml';
+# RESOLVE THE CONFIG FILE TO USE.
+my $config_file;
+if ($config =~ m[/]) {
+    # Assume this is a qualified path.
+    $config_file = $config;
+} else {
+    for my $dir ($ENV{HOME}, dirname(__FILE__)) {
+        $config_file = dirname(__FILE__) . '/../config/' . $config . '.yml';
+        last if (-e $config_file);
+    }
+}
 
 my ($LOGDIR, $DATA_DIR, $DEFAULT_SOURCES, $OPTS) = read_config($config_file);
 
@@ -89,7 +99,7 @@ sub read_config {
         croak <<"USAGE";
 Cannot use setting from $config_file as it does not exist.
 
-Usage: download_data -e flymine Uniprot
+Usage: $script -e env Uniprot
 USAGE
     }
 
