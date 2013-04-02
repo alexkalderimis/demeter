@@ -17,11 +17,13 @@ my $config = "testing";
 my $verbose = 0;
 my $show_sources = 0;
 my $show_help = 0;
+my $confdir = $ENV{HOME} . '/.demeter';
 
 my $script = __FILE__;
 
 my $result = GetOptions(
     "environment=s" => \$config,
+    "confdir=s"     => \$confdir,
     "verbose"       => \$verbose,
     "sources"       => \$show_sources,
     "help"          => \$show_help,
@@ -29,18 +31,25 @@ my $result = GetOptions(
 
 if ($show_help) {
     warn <<"HELP";
+
 $script
 Download data from specific sources
 
 Usage: perl $script -e environment Source1 Source2...
 
 Options:
-  -e --environment  The set of configuration options to load
+  -e --environment  The set of configuration options to load. Defaults to "testing"
   -s --sources      Show the list of available sources
   -h --help         Show this help
+  -c --confdir      An optional configuration directory. Defaults to ~/.demeter
 
 If no sources are selected, then then the default list from the 
 configuration file will be loaded and run.
+
+If the enviroment value points to a file, that will be loaded. If it names
+an environment, then a file named \$env.yml will be looked for first in
+\$confdir (if supplied), and then in the config directory of this distribution.
+
 HELP
     exit;
 }
@@ -60,10 +69,21 @@ if ($config =~ m[/]) {
     # Assume this is a qualified path.
     $config_file = $config;
 } else {
-    for my $dir ($ENV{HOME} . '/.demeter', dirname(__FILE__) . '/../config') {
+    for my $dir ($confdir, dirname(__FILE__) . '/../config') {
         $config_file = "$dir/$config.yml";
         last if (-e $config_file);
     }
+}
+# Check it exists.
+
+unless (-e $config_file) {
+    croak <<"USAGE";
+
+Cannot find resolve a config file for the $config environment.
+
+Usage: $script -e env Uniprot
+
+USAGE
 }
 
 my ($LOGDIR, $DATA_DIR, $DEFAULT_SOURCES, $OPTS) = read_config($config_file);
@@ -95,14 +115,6 @@ exit;
 
 sub read_config {
     my $config_file = shift;
-    unless (-e $config_file) {
-        croak <<"USAGE";
-
-Cannot use setting from $config_file as it does not exist.
-
-Usage: $script -e env Uniprot
-USAGE
-    }
 
     my $settings = YAML::LoadFile($config_file);
 
