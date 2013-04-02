@@ -60,8 +60,8 @@ if ($config =~ m[/]) {
     # Assume this is a qualified path.
     $config_file = $config;
 } else {
-    for my $dir ($ENV{HOME}, dirname(__FILE__)) {
-        $config_file = dirname(__FILE__) . '/../config/' . $config . '.yml';
+    for my $dir ($ENV{HOME} . '/.demeter', dirname(__FILE__) . '/../config') {
+        $config_file = "$dir/$config.yml";
         last if (-e $config_file);
     }
 }
@@ -97,6 +97,7 @@ sub read_config {
     my $config_file = shift;
     unless (-e $config_file) {
         croak <<"USAGE";
+
 Cannot use setting from $config_file as it does not exist.
 
 Usage: $script -e env Uniprot
@@ -105,10 +106,12 @@ USAGE
 
     my $settings = YAML::LoadFile($config_file);
 
-    @{[ @{$settings}{qw/log_dir data_dir/} ]} == 2 or croak <<"USAGE";
+    my ($log_dir, $data_dir) = @{$settings}{qw/log_dir data_dir/};
+    ($log_dir && $data_dir) or croak <<"USAGE";
+
 The config file must supply a value for both log_dir and data_dir.
 
-Usage: download_data -e flymine Uniprot
+Usage: $script -e env Source
 USAGE
 
     my $LOGDIR = ($settings->{log_dir} =~ m{^/}) 
