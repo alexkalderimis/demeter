@@ -4,14 +4,14 @@ use strict;
 use warnings;
 use File::Basename qw/dirname/;
 use lib dirname(__FILE__) . '/../lib';
-use DataDownloader::Util qw(make_logger);
+use App::Demeter::Util qw(make_logger);
 use MooseX::FollowPBP;
 use Getopt::Long;
 use YAML;
 use Carp;
 use Module::Find qw/findsubmod/;
 
-my @available_sources = grep {$_ !~ /ABC$/} findsubmod( 'DataDownloader::Source' );
+my @available_sources = grep {$_ !~ /ABC$/} findsubmod( 'App::Demeter::Source' );
 
 my $config = "testing";
 my $verbose = 0;
@@ -93,7 +93,7 @@ my %args   = (data_dir => $DATA_DIR, logger => $logger);
 my @sources_to_get = (@ARGV) ? @ARGV : @$DEFAULT_SOURCES;
 
 for my $source (@sources_to_get) {
-    my $package = "DataDownloader::Source::$source";
+    my $package = "App::Demeter::Source::$source";
     eval "require $package";
     if (my $e = $@) {
         $logger->error("Failed to load source $source:", $e);
