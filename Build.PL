@@ -3,10 +3,11 @@ use warnings;
 use Module::Build;
 
 my $builder = Module::Build->new(
-    module_name         => 'DataDownloader',
+    module_name         => 'App::Demeter',
     license             => 'lgpl',
+    dist_abstract       => 'Data Harvesting Application',
     dist_author         => q{Alex Kalderimis <perl@intermine.org>},
-    dist_version_from   => 'lib/DataDownloader.pm',
+    dist_version_from   => 'lib/App/Demeter.pm',
     requires => {
         'Moose' => '2.0',
         'MooseX::ABC' => '0.05',
@@ -25,7 +26,7 @@ my $builder = Module::Build->new(
     build_requires => {
         'Test::More' => 0,
     },
-    add_to_cleanup      => [ 'DataDownloader-*' ],
+    add_to_cleanup      => [ 'App-DataDownloader-*' ],
     create_makefile_pl => 'traditional',
 );
 
