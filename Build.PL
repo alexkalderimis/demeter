@@ -8,6 +8,7 @@ my $builder = Module::Build->new(
     dist_abstract       => 'Data Harvesting Application',
     dist_author         => q{Alex Kalderimis <perl@intermine.org>},
     dist_version_from   => 'lib/App/Demeter.pm',
+    share_dir           => 'config',
     requires => {
         'Moose' => '2.0',
         'MooseX::ABC' => '0.05',

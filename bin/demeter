@@ -2,14 +2,18 @@
 
 use strict;
 use warnings;
+
 use File::Basename qw/dirname/;
+
 use lib dirname(__FILE__) . '/../lib';
-use App::Demeter::Util qw(make_logger);
+use File::ShareDir qw/dist_dir/;
 use MooseX::FollowPBP;
 use Getopt::Long;
 use YAML;
 use Carp;
 use Module::Find qw/findsubmod/;
+
+use App::Demeter::Util qw/make_logger/;
 
 my @available_sources = grep {$_ !~ /ABC$/} findsubmod( 'App::Demeter::Source' );
 
@@ -19,6 +23,7 @@ my $show_sources = 0;
 my $show_help = 0;
 my $get_data = 0;
 my $confdir = $ENV{HOME} . '/.demeter';
+my $dist_dir = dist_dir('App-Demeter');
 
 my $script = __FILE__;
 
@@ -79,7 +84,7 @@ if ($config =~ m[/]) {
     # Assume this is a qualified path.
     $config_file = $config;
 } else {
-    for my $dir ($confdir, dirname(__FILE__) . '/../config') {
+    for my $dir ($confdir, $dist_dir, dirname(__FILE__) . '/../config') {
         $config_file = "$dir/$config.yml";
         last if (-e $config_file);
     }
