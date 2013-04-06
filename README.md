@@ -10,7 +10,7 @@ Demeter is a configurable data-harvesting application.
 Synopis
 --------
 
-    demeter -e my-config
+    demeter get
 
 Description
 ------------
@@ -27,6 +27,11 @@ Demeter requires a configuration file to be really useful. You can see
 some examples of them in the `config` directory. These should be _YAML_
 documents.
 
+Adding a new downloader is as straightforward as adding a new perl module in
+the `App::Demeter::Source` namespace. Because downloaders are perl modules
+that means they can be versioned, installed, have dependencies, and all
+the other good things about having perl modules.
+
 INSTALLATION
 ---------------
 
@@ -41,10 +46,10 @@ to install it, you can do so with the following commands.
 SUPPORT AND DOCUMENTATION
 --------------------------
 
-The documentation is a bit patchy, and could do with some improvement. You can try
+The documentation is a bit non-existent, and could do with some improvement. You can try
 your luck with perldoc.
 
-    perldoc DataDownloader
+    perldoc App::Demeter
 
 A better bet is contacting the author (alexkalderimis at gmail.com), or
 the intermine development list (dev at intermine.org), where this code is maintained.
