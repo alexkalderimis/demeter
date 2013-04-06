@@ -23,7 +23,7 @@ my $show_sources = 0;
 my $show_help = 0;
 my $get_data = 0;
 my $confdir = $ENV{HOME} . '/.demeter';
-my $dist_dir = dist_dir('App-Demeter');
+my $dist_dir = eval {dist_dir('App-Demeter')} || '';
 
 my $script = __FILE__;
 
@@ -80,11 +80,12 @@ if ($show_sources) {
 
 # RESOLVE THE CONFIG FILE TO USE.
 my $config_file;
+my @look_in = ($confdir, $dist_dir, dirname(__FILE__) . '/../config');
 if ($config =~ m[/]) {
     # Assume this is a qualified path.
     $config_file = $config;
 } else {
-    for my $dir ($confdir, $dist_dir, dirname(__FILE__) . '/../config') {
+    for my $dir (@look_in) {
         $config_file = "$dir/$config.yml";
         last if (-e $config_file);
     }
@@ -92,9 +93,10 @@ if ($config =~ m[/]) {
 # Check it exists.
 
 unless (-e $config_file) {
+    $, = ", ";
     croak <<"USAGE";
 
-Cannot find resolve a config file for the $config environment.
+Cannot find a config file for the $config environment. Looked in: @look_in.
 
 Usage: perl $script [options] command [Source1 Source2...]
 
