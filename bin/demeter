@@ -13,10 +13,11 @@ use Module::Find qw/findsubmod/;
 
 my @available_sources = grep {$_ !~ /ABC$/} findsubmod( 'App::Demeter::Source' );
 
-my $config = "testing";
 my $verbose = 0;
+my $config = 'default';
 my $show_sources = 0;
 my $show_help = 0;
+my $get_data = 0;
 my $confdir = $ENV{HOME} . '/.demeter';
 
 my $script = __FILE__;
@@ -25,9 +26,14 @@ my $result = GetOptions(
     "environment=s" => \$config,
     "confdir=s"     => \$confdir,
     "verbose"       => \$verbose,
-    "sources"       => \$show_sources,
-    "help"          => \$show_help,
+    "help"          => \$show_help, # Because it's common
 );
+
+my ($command, @to_run) = @ARGV;
+
+$get_data     = $command =~ /^g(et?)?/i;
+$show_sources = $command =~ /^l(i(st?)?)?$/i;
+$show_help ||= ($command =~ /^h(e(lp?)?)?$/i) || not ($command || $get_data || $show_sources);
 
 if ($show_help) {
     warn <<"HELP";
@@ -35,13 +41,17 @@ if ($show_help) {
 $script
 Download data from specific sources
 
-Usage: perl $script -e environment Source1 Source2...
+Usage: perl $script [options] command [Source1 Source2...]
 
 Options:
-  -e --environment  The set of configuration options to load. Defaults to "testing"
-  -s --sources      Show the list of available sources
+  -e --environment  The set of configuration options to load. Defaults to "default"
   -h --help         Show this help
   -c --confdir      An optional configuration directory. Defaults to ~/.demeter
+
+Commands:
+  get           Download data
+  help          Show help information
+  list          Show available sources
 
 If no sources are selected, then then the default list from the 
 configuration file will be loaded and run.
@@ -81,7 +91,7 @@ unless (-e $config_file) {
 
 Cannot find resolve a config file for the $config environment.
 
-Usage: $script -e env Uniprot
+Usage: perl $script [options] command [Source1 Source2...]
 
 USAGE
 }
@@ -90,9 +100,10 @@ my ($LOGDIR, $DATA_DIR, $DEFAULT_SOURCES, $OPTS) = read_config($config_file);
 
 my $logger =  make_logger($LOGDIR);
 my %args   = (data_dir => $DATA_DIR, logger => $logger);
-my @sources_to_get = (@ARGV) ? @ARGV : @$DEFAULT_SOURCES;
+my @sources_to_get = (@to_run) ? @to_run : @$DEFAULT_SOURCES;
 
 for my $source (@sources_to_get) {
+    $logger->debug("Loading $source");
     my $package = "App::Demeter::Source::$source";
     eval "require $package";
     if (my $e = $@) {
@@ -123,7 +134,8 @@ sub read_config {
 
 The config file must supply a value for both log_dir and data_dir.
 
-Usage: $script -e env Source
+Usage: perl $script [options] command [Source1 Source2...]
+
 USAGE
 
     my $LOGDIR = ($settings->{log_dir} =~ m{^/}) 
