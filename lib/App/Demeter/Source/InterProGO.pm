@@ -1,7 +1,7 @@
-package DataDownloader::Source::InterProGO;
+package App::Demeter::Source::InterProGO;
 
 use Moose;
-extends 'DataDownloader::Source::ABC';
+extends 'App::Demeter::Source::ABC';
 
 use constant {
     TITLE => "InterPro GO",

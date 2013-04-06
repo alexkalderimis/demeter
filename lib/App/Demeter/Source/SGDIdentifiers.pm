@@ -1,7 +1,7 @@
-package DataDownloader::Source::SGDIdentifiers;
+package App::Demeter::Source::SGDIdentifiers;
 
 use Moose;
-extends 'DataDownloader::Source::ABC';
+extends 'App::Demeter::Source::ABC';
 
 # http://downloads.yeastgenome.org/curation/chromosomal_feature/SGD_features.tab
 # Chromosomal features in SGD, including coordinates and subfeatures.

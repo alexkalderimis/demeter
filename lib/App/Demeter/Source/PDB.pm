@@ -1,7 +1,7 @@
-package DataDownloader::Source::PDB;
+package App::Demeter::Source::PDB;
 
 use Moose;
-extends 'DataDownloader::Source::ABC';
+extends 'App::Demeter::Source::ABC';
 require LWP::UserAgent;
 require HTTP::Request;
 use Time::Piece;

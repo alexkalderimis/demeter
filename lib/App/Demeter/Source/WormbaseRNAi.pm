@@ -1,7 +1,7 @@
-package DataDownloader::Source::WormbaseRNAi;
+package App::Demeter::Source::WormbaseRNAi;
 
 use Moose;
-extends 'DataDownloader::Source::ABC';
+extends 'App::Demeter::Source::ABC';
 use URI;
 use autodie qw(open close);
 use Ouch;

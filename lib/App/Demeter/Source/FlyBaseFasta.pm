@@ -1,7 +1,7 @@
-package DataDownloader::Source::FlyBaseFasta;
+package App::Demeter::Source::FlyBaseFasta;
 
 use Moose;
-extends 'DataDownloader::Source::FtpBase';
+extends 'App::Demeter::Source::FtpBase';
 
 use constant {
     TITLE       => "FlyBase Sequence data",

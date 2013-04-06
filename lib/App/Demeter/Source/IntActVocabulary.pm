@@ -1,7 +1,7 @@
-package DataDownloader::Source::IntActVocabulary;
+package App::Demeter::Source::IntActVocabulary;
 
 use Moose;
-extends 'DataDownloader::Source::ABC';
+extends 'App::Demeter::Source::ABC';
 
 use constant {
     TITLE => 

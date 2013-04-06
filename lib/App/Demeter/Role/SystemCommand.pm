@@ -1,4 +1,4 @@
-package DataDownloader::Role::SystemCommand;
+package App::Demeter::Role::SystemCommand;
 
 use Moose::Role;
 

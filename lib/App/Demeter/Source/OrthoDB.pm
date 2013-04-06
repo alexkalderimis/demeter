@@ -1,7 +1,7 @@
-package DataDownloader::Source::OrthoDB;
+package App::Demeter::Source::OrthoDB;
 
 use Moose;
-extends 'DataDownloader::Source::FtpBase';
+extends 'App::Demeter::Source::FtpBase';
 
 use constant {
     TITLE => 'OrthoDB',

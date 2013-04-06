@@ -1,11 +1,11 @@
-package DataDownloader::Resource::FTP;
+package App::Demeter::Resource::FTP;
 
 use Moose;
 use Ouch qw/:traditional/;
 use MooseX::FollowPBP;
 use Number::Format qw(format_bytes);
-extends 'DataDownloader::Resource::ABC';
-with 'DataDownloader::Role::FTP';
+extends 'App::Demeter::Resource::ABC';
+with 'App::Demeter::Role::FTP';
 
 sub fetch {
     my $self = shift;

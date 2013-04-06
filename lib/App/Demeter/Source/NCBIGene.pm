@@ -1,7 +1,7 @@
-package DataDownloader::Source::NCBIGene;
+package App::Demeter::Source::NCBIGene;
 
 use Moose;
-extends 'DataDownloader::Source::FtpBase';
+extends 'App::Demeter::Source::FtpBase';
 
 # human - ftp://ftp.ncbi.nih.gov/gene/DATA/GENE_INFO/Mammalia/Homo_sapiens.gene_info.gz
 # all - ftp://ftp.ncbi.nih.gov/gene/DATA/GENE_INFO/All_Data.gene_info.gz

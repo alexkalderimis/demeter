@@ -1,7 +1,7 @@
-package DataDownloader::Source::FlyBaseOrthologues;
+package App::Demeter::Source::FlyBaseOrthologues;
 
 use Moose;
-extends 'DataDownloader::Source::FtpBase';
+extends 'App::Demeter::Source::FtpBase';
 
 use constant {
     TITLE => "FlyBase Homology",

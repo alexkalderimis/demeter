@@ -1,7 +1,7 @@
-package DataDownloader::Source::HomoloGene;
+package App::Demeter::Source::HomoloGene;
 
 use Moose;
-extends 'DataDownloader::Source::FtpBase';
+extends 'App::Demeter::Source::FtpBase';
 
 use constant {
     TITLE => 'HomoloGene',

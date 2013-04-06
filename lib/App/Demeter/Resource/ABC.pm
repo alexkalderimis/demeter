@@ -1,4 +1,4 @@
-package DataDownloader::Resource::ABC;
+package App::Demeter::Resource::ABC;
 
 use strict;
 use warnings;
@@ -6,7 +6,7 @@ use warnings;
 use Moose;
 use MooseX::ABC;
 
-with 'DataDownloader::Role::SystemCommand';
+with 'App::Demeter::Role::SystemCommand';
 
 requires 'fetch';
 

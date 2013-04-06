@@ -1,10 +1,10 @@
-package DataDownloader::Role::Source;
+package App::Demeter::Role::Source;
 
 use Moose::Role;
 use Moose::Util::TypeConstraints;
 use MooseX::FollowPBP;
 use MooseX::FileAttribute;
-use DataDownloader::Util qw(make_logger get_ymd make_link files_are_identical);
+use App::Demeter::Util qw(make_logger get_ymd make_link files_are_identical);
 use Ouch qw(:traditional);
 use Scalar::Util qw(blessed);
 use File::Path qw(mkpath);

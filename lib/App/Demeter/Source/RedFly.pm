@@ -1,8 +1,8 @@
-package DataDownloader::Source::RedFly;
+package App::Demeter::Source::RedFly;
 
 use Moose;
 use Web::Scraper;
-extends 'DataDownloader::Source::ABC';
+extends 'App::Demeter::Source::ABC';
 
 use constant {
     TITLE       => 

@@ -1,7 +1,7 @@
-package DataDownloader::Source::AnophelesIdentifiers;
+package App::Demeter::Source::AnophelesIdentifiers;
 
 use Moose;
-extends 'DataDownloader::Source::ABC';
+extends 'App::Demeter::Source::ABC';
 use LWP;
 
 # ftp://ftp.vectorbase.org/public_data/organism_data/agambiae/Other/AgamP3.3-to-AgamP3.4-Identifiers.tgz

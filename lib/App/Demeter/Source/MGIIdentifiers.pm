@@ -1,7 +1,7 @@
-package DataDownloader::Source::MGIIdentifiers;
+package App::Demeter::Source::MGIIdentifiers;
 
 use Moose;
-extends 'DataDownloader::Source::FtpBase';
+extends 'App::Demeter::Source::FtpBase';
 
 # ftp://ftp.informatics.jax.org/pub/reports/MGI_Coordinate.rpt
 # UPDATE: MGI_Coordinate.rpt was renamed to MGI_Coordinate_build37.rpt on 09/01/2013

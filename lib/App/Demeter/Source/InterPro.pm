@@ -1,7 +1,7 @@
-package DataDownloader::Source::InterPro;
+package App::Demeter::Source::InterPro;
 
 use Moose;
-extends 'DataDownloader::Source::FtpBase';
+extends 'App::Demeter::Source::FtpBase';
 
 use constant {
     TITLE => 'InterPro protein family and domain data',

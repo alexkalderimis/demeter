@@ -1,8 +1,8 @@
-package DataDownloader::Source::GOAnnotation;
+package App::Demeter::Source::GOAnnotation;
 
 =head1 NAME
 
-DataDownloader::Source::GoAnnotation;
+App::Demeter::Source::GoAnnotation;
 
 =head1 SYNOPSIS
 
@@ -26,11 +26,11 @@ sort downloaded file as above
 =cut
 
 use Moose;
-extends 'DataDownloader::Source::FtpBase';
+extends 'App::Demeter::Source::FtpBase';
 use PerlIO::gzip;
 use File::Basename;
 use autodie qw(open close);
-use DataDownloader::Util 'get_ymd';
+use App::Demeter::Util 'get_ymd';
 
 use constant {
     TITLE => "GO Annotation",

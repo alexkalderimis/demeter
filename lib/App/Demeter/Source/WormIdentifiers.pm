@@ -1,8 +1,8 @@
-package DataDownloader::Source::WormIdentifiers;
+package App::Demeter::Source::WormIdentifiers;
 
 use Moose;
 use MooseX::FollowPBP;
-extends 'DataDownloader::Source::ABC';
+extends 'App::Demeter::Source::ABC';
 use URI;
 use autodie qw(open close);
 use Ouch;

@@ -1,8 +1,8 @@
-package DataDownloader::Source::Reactome;
+package App::Demeter::Source::Reactome;
 
 use Moose;
-extends 'DataDownloader::Source::ABC';
-use DataDownloader::Util qw(make_link);
+extends 'App::Demeter::Source::ABC';
+use App::Demeter::Util qw(make_link);
 use File::Path qw(mkpath);
 
 use constant {

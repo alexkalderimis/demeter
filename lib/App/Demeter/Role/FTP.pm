@@ -1,4 +1,4 @@
-package DataDownloader::Role::FTP;
+package App::Demeter::Role::FTP;
 
 use Moose::Role;
 use MooseX::FollowPBP;

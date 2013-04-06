@@ -1,11 +1,11 @@
-package DataDownloader::Source::EnsemblCompara;
+package App::Demeter::Source::EnsemblCompara;
 
 use strict;
 use warnings;
 
 use Moose;
 use MooseX::FollowPBP;
-with 'DataDownloader::Role::Source';
+with 'App::Demeter::Role::Source';
 
 use Bio::EnsEMBL::Registry;
 use autodie qw(open close);

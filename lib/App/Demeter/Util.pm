@@ -1,4 +1,4 @@
-package DataDownloader::Util;
+package App::Demeter::Util;
 
 use Exporter qw(import);
 use Path::Class qw(file dir);

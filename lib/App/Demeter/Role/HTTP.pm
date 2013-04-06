@@ -1,8 +1,8 @@
-package DataDownloader::Role::HTTP;
+package App::Demeter::Role::HTTP;
 
 use MooseX::Declare;
 
-role DataDownloader::Role::HTTP {
+role App::Demeter::Role::HTTP {
 
     use autodie qw(symlink);
     use Path::Class qw(file dir);

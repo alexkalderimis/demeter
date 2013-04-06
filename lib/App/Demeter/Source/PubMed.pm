@@ -1,7 +1,7 @@
-package DataDownloader::Source::PubMed;
+package App::Demeter::Source::PubMed;
 
 use Moose;
-extends 'DataDownloader::Source::FtpBase';
+extends 'App::Demeter::Source::FtpBase';
 
 use constant {
     TITLE => "PubMed",

@@ -1,7 +1,7 @@
-package DataDownloader::Source::TreeFam;
+package App::Demeter::Source::TreeFam;
 
 use Moose;
-extends 'DataDownloader::Source::FtpBase';
+extends 'App::Demeter::Source::FtpBase';
 
 use constant {
     TITLE => 'TreeFam',

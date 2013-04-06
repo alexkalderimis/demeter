@@ -1,7 +1,7 @@
-package DataDownloader::Source::IntAct;
+package App::Demeter::Source::IntAct;
 
 use Moose;
-extends 'DataDownloader::Source::FtpBase';
+extends 'App::Demeter::Source::FtpBase';
 
 use Carp "confess";
 use Perl6::Junction qw(any);

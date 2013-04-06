@@ -1,7 +1,7 @@
-package DataDownloader::Source::FlyCVTerms;
+package App::Demeter::Source::FlyCVTerms;
 
 use Moose;
-extends 'DataDownloader::Source::FtpBase';
+extends 'App::Demeter::Source::FtpBase';
 
 use constant {
     TITLE => 'Fly Ontologies',

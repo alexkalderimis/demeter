@@ -1,4 +1,4 @@
-package DataDownloader::Config::FlatFile;
+package App::Demeter::Config::FlatFile;
 
 use Exporter qw(import);
 our @EXPORT_OK = qw(config_species);

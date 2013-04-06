@@ -1,7 +1,7 @@
-package DataDownloader::Source::KeggPathway;
+package App::Demeter::Source::KeggPathway;
 
 use Moose;
-extends 'DataDownloader::Source::ABC';
+extends 'App::Demeter::Source::ABC';
 use IO::Handle;
 
 use SOAP::Lite;

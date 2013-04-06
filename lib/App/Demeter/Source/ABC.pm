@@ -1,4 +1,4 @@
-package DataDownloader::Source::ABC;
+package App::Demeter::Source::ABC;
 
 use Moose;
 use MooseX::ABC;
@@ -7,11 +7,11 @@ use Moose::Util::TypeConstraints;
 
 use Ouch ':traditional';
 
-require DataDownloader::Resource::HTTP;
-require DataDownloader::Resource::FTP;
+require App::Demeter::Resource::HTTP;
+require App::Demeter::Resource::FTP;
 
-with 'DataDownloader::Role::Source';
-with 'DataDownloader::Role::SystemCommand';
+with 'App::Demeter::Role::Source';
+with 'App::Demeter::Role::SystemCommand';
 
 use feature 'switch';
 
@@ -90,8 +90,8 @@ sub make_source {
 
     my $method = delete($args->{METHOD}) || $self->METHOD;
     given (lc($method)) {
-        when("http") {return DataDownloader::Resource::HTTP->new($args)}
-        when("ftp")  {return DataDownloader::Resource::FTP->new($args)}
+        when("http") {return App::Demeter::Resource::HTTP->new($args)}
+        when("ftp")  {return App::Demeter::Resource::FTP->new($args)}
         default {confess "No source type found for method: $method"}
     };
 }

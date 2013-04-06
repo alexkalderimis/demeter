@@ -1,7 +1,7 @@
-package DataDownloader::Source::Panther;
+package App::Demeter::Source::Panther;
 
 use Moose;
-extends 'DataDownloader::Source::FtpBase';
+extends 'App::Demeter::Source::FtpBase';
 
 use constant {
     TITLE => 'Panther',

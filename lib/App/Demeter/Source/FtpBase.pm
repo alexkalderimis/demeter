@@ -1,14 +1,14 @@
-package DataDownloader::Source::FtpBase;
+package App::Demeter::Source::FtpBase;
 
 use Moose;
 use MooseX::ABC;
 use MooseX::FollowPBP;
 use Net::FTP;
-extends 'DataDownloader::Source::ABC';
-with 'DataDownloader::Role::FTP';
+extends 'App::Demeter::Source::ABC';
+with 'App::Demeter::Role::FTP';
 
 use Ouch qw(:traditional);
-use DataDownloader::Util 'get_ymd';
+use App::Demeter::Util 'get_ymd';
 
 use constant METHOD => 'FTP';
 

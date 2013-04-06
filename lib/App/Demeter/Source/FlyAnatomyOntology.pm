@@ -1,7 +1,7 @@
-package DataDownloader::Source::FlyAnatomyOntology;
+package App::Demeter::Source::FlyAnatomyOntology;
 
 use Moose;
-extends 'DataDownloader::Source::ABC';
+extends 'App::Demeter::Source::ABC';
 
 use constant {
     TITLE  => 'Fly Anatomy Ontology',

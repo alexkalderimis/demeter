@@ -1,7 +1,7 @@
-package DataDownloader::Source::BioGRID;
+package App::Demeter::Source::BioGRID;
 
 use Moose;
-extends 'DataDownloader::Source::ABC';
+extends 'App::Demeter::Source::ABC';
 use LWP;
 use Web::Scraper;
 

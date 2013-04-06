@@ -1,7 +1,7 @@
-package DataDownloader::Resource::HTTP;
+package App::Demeter::Resource::HTTP;
 
 use Moose;
-extends 'DataDownloader::Resource::ABC';
+extends 'App::Demeter::Resource::ABC';
 
 use MooseX::FollowPBP;
 require LWP::UserAgent;

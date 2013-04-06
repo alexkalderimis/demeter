@@ -1,7 +1,7 @@
-package DataDownloader::Source::FlyAtlas;
+package App::Demeter::Source::FlyAtlas;
 
 use Moose;
-extends 'DataDownloader::Source::ABC';
+extends 'App::Demeter::Source::ABC';
 use autodie qw(open);
 
 use constant {

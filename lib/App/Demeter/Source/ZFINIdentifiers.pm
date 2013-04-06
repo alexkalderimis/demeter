@@ -1,7 +1,7 @@
-package DataDownloader::Source::ZFINIdentifiers;
+package App::Demeter::Source::ZFINIdentifiers;
 
 use Moose;
-extends 'DataDownloader::Source::ABC';
+extends 'App::Demeter::Source::ABC';
 
 # http://zfin.org/downloads/ensembl_1_to_1.txt
 # ZFIN Marker associations to Ensembl IDs (Only associations with 1:1 

@@ -1,7 +1,7 @@
-package DataDownloader::Source::RNAiScreens;
+package App::Demeter::Source::RNAiScreens;
 
 use Moose;
-extends 'DataDownloader::Source::ABC';
+extends 'App::Demeter::Source::ABC';
 use URI;
 use Web::Scraper;
 

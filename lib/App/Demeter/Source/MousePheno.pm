@@ -1,7 +1,7 @@
-package DataDownloader::Source::MousePheno;
+package App::Demeter::Source::MousePheno;
 
 use Moose;
-extends 'DataDownloader::Source::FtpBase';
+extends 'App::Demeter::Source::FtpBase';
 
 use constant {
     TITLE => 'MousePheno',

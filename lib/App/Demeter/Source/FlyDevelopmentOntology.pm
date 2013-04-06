@@ -1,7 +1,7 @@
-package DataDownloader::Source::FlyDevelopmentOntology;
+package App::Demeter::Source::FlyDevelopmentOntology;
 
 use Moose;
-extends 'DataDownloader::Source::FtpBase';
+extends 'App::Demeter::Source::FtpBase';
 
 use constant {
     TITLE => 'Fly Ontologies',

@@ -1,7 +1,7 @@
-package DataDownloader::Source::FlyBaseChado;
+package App::Demeter::Source::FlyBaseChado;
 
 use Moose;
-extends 'DataDownloader::Source::FtpBase';
+extends 'App::Demeter::Source::FtpBase';
 
 use constant {
     TITLE       => "FlyBase genomic data",

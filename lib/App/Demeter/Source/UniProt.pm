@@ -1,7 +1,7 @@
-package DataDownloader::Source::UniProt;
+package App::Demeter::Source::UniProt;
 
 use Moose;
-extends 'DataDownloader::Source::FtpBase';
+extends 'App::Demeter::Source::FtpBase';
 use MooseX::FollowPBP;
 use URI;
 use Ouch qw(:traditional);

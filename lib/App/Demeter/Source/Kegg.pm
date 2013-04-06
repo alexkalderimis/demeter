@@ -1,9 +1,9 @@
-package DataDownloader::Source::Kegg;
+package App::Demeter::Source::Kegg;
 
 use Moose;
-extends 'DataDownloader::Source::FtpBase';
+extends 'App::Demeter::Source::FtpBase';
 
-use DataDownloader::Util qw(search_webpage);
+use App::Demeter::Util qw(search_webpage);
 
 use constant {
     TITLE => 'Kegg',

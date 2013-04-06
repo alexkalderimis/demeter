@@ -1,7 +1,7 @@
-package DataDownloader::Source::RGDIdentifiers;
+package App::Demeter::Source::RGDIdentifiers;
 
 use Moose;
-extends 'DataDownloader::Source::FtpBase';
+extends 'App::Demeter::Source::FtpBase';
 
 # ftp://rgd.mcw.edu/pub/data_release/GENES_RAT.txt
 
