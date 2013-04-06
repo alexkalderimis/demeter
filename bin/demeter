@@ -17,11 +17,17 @@ use App::Demeter::Util qw/make_logger/;
 
 my @available_sources = grep {$_ !~ /ABC$/} findsubmod( 'App::Demeter::Source' );
 
+my $USAGE = 'Usage: perl $script [options] command [Source1 Source2...]';
+
+my $SYMLINKS_AVAILABLE = eval { symlink('', ''); 1 };
+
 my $verbose = 0;
 my $config = 'default';
 my $show_sources = 0;
 my $show_help = 0;
 my $get_data = 0;
+my $do_alias = 0;
+
 my $confdir = $ENV{HOME} . '/.demeter';
 my $dist_dir = eval {dist_dir('App-Demeter')} || '';
 
@@ -34,10 +40,11 @@ my $result = GetOptions(
     "help"          => \$show_help, # Because it's common
 );
 
-my ($command, @to_run) = @ARGV;
+my ($command, @cmd_args) = @ARGV;
 
-$get_data     = $command =~ /^g(et?)?/i;
-$show_sources = $command =~ /^l(i(st?)?)?$/i;
+$get_data     = $command =~ /^g(et?)?/i if $command;
+$show_sources = $command =~ /^l(i(st?)?)?$/i if $command;
+$do_alias     = $command =~ /^a(l(i(as?)?)?)?$/ if $command;
 $show_help ||= ($command =~ /^h(e(lp?)?)?$/i) || not ($command || $get_data || $show_sources);
 
 if ($show_help) {
@@ -46,7 +53,7 @@ if ($show_help) {
 $script
 Download data from specific sources
 
-Usage: perl $script [options] command [Source1 Source2...]
+$USAGE
 
 Options:
   -e --environment  The set of configuration options to load. Defaults to "default"
@@ -57,6 +64,7 @@ Commands:
   get           Download data
   help          Show help information
   list          Show available sources
+  alias name    Alias an environment as another name
 
 If no sources are selected, then then the default list from the 
 configuration file will be loaded and run.
@@ -78,6 +86,8 @@ if ($show_sources) {
     exit;
 }
 
+    
+
 # RESOLVE THE CONFIG FILE TO USE.
 my $config_file;
 my @look_in = ($confdir, $dist_dir, dirname(__FILE__) . '/../config');
@@ -98,16 +108,39 @@ unless (-e $config_file) {
 
 Cannot find a config file for the $config environment. Looked in: @look_in.
 
-Usage: perl $script [options] command [Source1 Source2...]
+$USAGE
 
 USAGE
+}
+
+if ($do_alias) {
+    if (@cmd_args != 1) {
+        croak <<"USAGE";
+
+Expected a single argument to alias, got [@cmd_args]
+
+$USAGE
+
+USAGE
+    }
+    croak "Symlinks not supported on this system." unless $SYMLINKS_AVAILABLE;
+
+    my $alias = $cmd_args[0];
+    my $alias_file = "$confdir/$alias.yml";
+    unless (-e $confdir) {
+        mkdir($confdir) or die("Could not make $confdir, $!");
+    }
+    symlink($config_file, $alias_file)
+        or die("Could not link $config_file to $alias_file, $!");
+    warn "Aliased $config_file as $alias";
+    exit;
 }
 
 my ($LOGDIR, $DATA_DIR, $DEFAULT_SOURCES, $OPTS) = read_config($config_file);
 
 my $logger =  make_logger($LOGDIR);
 my %args   = (data_dir => $DATA_DIR, logger => $logger);
-my @sources_to_get = (@to_run) ? @to_run : @$DEFAULT_SOURCES;
+my @sources_to_get = (@cmd_args) ? @cmd_args : @$DEFAULT_SOURCES;
 
 for my $source (@sources_to_get) {
     $logger->debug("Loading $source");
