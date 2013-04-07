@@ -64,8 +64,6 @@ for my $module (keys %extra_imports) {
     }
 }
 
-print join(", ", @extra_reqs), "\n";
-
 my $builder = Module::Build->new(
     module_name         => 'App::Demeter',
     license             => 'lgpl',
@@ -91,12 +89,6 @@ $builder->create_build_script();
 
 sub user_wants {
     my ($thing) = @_;
-    looks_like(Module::Build->prompt("Add support for $thing?", 'n'), 'yes');
+    Module::Build->y_n("Add support for $thing?", 'n');
 }
 
-sub looks_like {
-    my ($input, $str) = @_;
-    my @chars = reverse split '', $str;
-    my $pattern = reduce { $a ? "$b($a)?" : $b } undef, @chars;
-    $input =~ /$pattern/i;
-}
